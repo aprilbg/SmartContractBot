@@ -5,7 +5,7 @@ namespace SmartContract.Token.Setup
         public string _contractAddress = "";
         public string _fromAddress = "";
         public string _privateKey = "";
-        public string _url = "https://rpc-mumbai.maticvigil.com/v1/c954fb214032bf41aeb29431d7c88147f01b2fee";
+        public string _url = "https://rpc-mumbai.maticvigil.com/v1/8ebbd4d9e5ab42a182d5b812374afbc8c0619903";
         public string abi = @"[
 	{
 		'constant': true,
