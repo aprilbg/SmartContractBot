@@ -9,6 +9,7 @@ foreach (var arg in args)
         if (arg == "eth") dicActor.Add(arg, new EthActor());
         else if (arg == "matic") dicActor.Add(arg, new MaticActor());
         else if (arg == "klaytn") dicActor.Add(arg, new KlaytnActor());
+        else if (arg == "nft") dicActor.Add(arg, new NFTactor());
     }
 }
 
