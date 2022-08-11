@@ -1,7 +1,7 @@
-public class Dummy_NFT
+public class Dummy_NFT_four
 {
     private System.Threading.Thread? mainThread = null;
-    private Bot_nft bot_nft = new Bot_nft();
+    private nft_bot bot = new nft_bot(eNFTType.four);
 
     public void Start()
     {
@@ -18,13 +18,14 @@ public class Dummy_NFT
         {
             try
             {
-                bot_nft.Balance_DO();
-                bot_nft.SafeTransfer_DO();
+                bot.GetNftInfo();
+                bot.SafeTransfer_DO();
             }
             catch(Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
+            System.Threading.Thread.Sleep(1);
         }
     }
 }

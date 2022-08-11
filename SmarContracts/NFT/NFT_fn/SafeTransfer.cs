@@ -23,11 +23,15 @@ class Transfer_NFT
         _smartContractTransactionSignedReqeust = new KlkaytnSmartContractTransactionSignedRequest(url, fromAddress, privateKey, 1001);
         _klayGetTransactionReceiptPollingRequest = new klayGetTransactionReceiptPollingRequest(url);
     }
-    public async Task<KlayTransactionReceipt> nft_transfer()    
+    public async Task<KlayTransactionReceipt> nft_transfer()
     {
         Function _fnTransferFunction = _contract.GetFunction("safeTransferFrom");
-        TransactionInput _transactionInput = _fnTransferFunction.CreateTransactionInput(_fromAddress, _toAddress, _tokenId);
+        TransactionInput _transactionInput = _fnTransferFunction.CreateTransactionInput(_fromAddress, _fromAddress, _toAddress, _tokenId);
         await _smartContractTransactionSignedReqeust.SendAndSignedRequest(_transactionInput);
+        if(_smartContractTransactionSignedReqeust.Result == null)
+        {
+            return null;
+        }
         await _klayGetTransactionReceiptPollingRequest.PollForReceipt(_smartContractTransactionSignedReqeust.Result, 2.0f);
         return _klayGetTransactionReceiptPollingRequest.Result;
     }

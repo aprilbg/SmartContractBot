@@ -4,7 +4,6 @@ using SmartContract.Klaytn;
 public class Bot_seven
 {
     decimal value_seven;
-    KlayTransactionReceipt info = new KlayTransactionReceipt();
     private SmartContract.Token.Setup.Token_Setup_one T_setup_one = new SmartContract.Token.Setup.Token_Setup_one();
     private SmartContract.Token.Setup.Token_Setup_two T_setup_two = new SmartContract.Token.Setup.Token_Setup_two();
     private SmartContract.Token.Setup.Token_Setup_three T_setup_three = new SmartContract.Token.Setup.Token_Setup_three();
