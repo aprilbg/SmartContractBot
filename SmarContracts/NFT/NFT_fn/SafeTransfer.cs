@@ -1,8 +1,6 @@
 using SmartContract.Klaytn.JsonRpc.UnityClient;
 using Nethereum.Contracts;
 using Nethereum.RPC.Eth.DTOs;
-using Nethereum.Util;
-using Nethereum.RPC;
 using SmartContract.Klaytn;
 using System.Numerics;
 
