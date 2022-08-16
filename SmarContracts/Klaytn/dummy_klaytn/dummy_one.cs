@@ -1,7 +1,7 @@
 public class Dummy_One
 {
     private System.Threading.Thread? mainThread = null;
-    private Bot_one bot_one = new Bot_one();
+    private klaytn_bot bot_one = new klaytn_bot(eKlaytnType.one);
 
     public void Start()
     {
@@ -18,7 +18,7 @@ public class Dummy_One
         {
             try
             {
-                bot_one.Balance_DO();
+                bot_one.BalanceOfInfo();
                 bot_one.Transfer_Do();
             }
             catch(Exception ex)
