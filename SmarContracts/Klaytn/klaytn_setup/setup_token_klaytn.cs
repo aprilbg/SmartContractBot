@@ -2,9 +2,9 @@ namespace SmartContract.Token.Setup
 {
     public class K_token_setup
     {
-        public string _contractAddress = "0x80CF1d172c657Edd39356f769C41080B35b8d99c";
-        public string _fromAddress = "0xf3c1341bf9000a50ba3dd9bdb0434262f28e1d6f";
-        public string _privateKey = "0xd1a7f69de6a19541327b8fc0389cc3f203c40f4a043bf133783488741f1e32c8";
+        public string _contractAddress = "";
+        public string _fromAddress = "";
+        public string _privateKey = "";
         public string _url = "https://api.baobab.klaytn.net:8651";
         public string abi =
         @"[
@@ -329,7 +329,12 @@ namespace SmartContract.Token.Setup
     }
     public class Token_Setup_one : K_token_setup
     {
-
+        public Token_Setup_one()
+        {
+            _contractAddress = "0x80CF1d172c657Edd39356f769C41080B35b8d99c";
+            _fromAddress = "0xf3c1341bf9000a50ba3dd9bdb0434262f28e1d6f";
+            _privateKey = "0xd1a7f69de6a19541327b8fc0389cc3f203c40f4a043bf133783488741f1e32c8";
+        }
     }
     public class Token_Setup_two : K_token_setup
     {
