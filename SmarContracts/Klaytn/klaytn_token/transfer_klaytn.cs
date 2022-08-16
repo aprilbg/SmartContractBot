@@ -21,7 +21,7 @@ class Transfer_Token_Klaytn
         _smartContractTransactionSignedReqeust = new KlkaytnSmartContractTransactionSignedRequest(url, fromAddress, privateKey, 1001);
         _klayGetTransactionReceiptPollingRequest = new klayGetTransactionReceiptPollingRequest(url);
     }
-    public async Task<KlayTransactionReceipt> token_transfer(int cycleCount = 0)
+    public async Task<KlayTransactionReceipt> token_transfer()
     {
         Function _fnTransferFunction = _contract.GetFunction("transfer");
         TransactionInput _transactionInput = _fnTransferFunction.CreateTransactionInput(_fromAddress, _toAddress, UnitConversion.Convert.ToWei(_value));
