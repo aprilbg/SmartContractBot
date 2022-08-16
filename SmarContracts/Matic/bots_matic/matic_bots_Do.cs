@@ -31,6 +31,7 @@ public class MaticBotsDo
     }
     public void Transfer()
     {
+        _listReceipt.Clear();
         if (false == _dicMatics.ContainsKey(_type)) throw new Exception("");
         if (_value < UnitConversion.Convert.FromWei(3000)) throw new Exception("");
 

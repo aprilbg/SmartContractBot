@@ -33,6 +33,7 @@ public class EthereumBotsDo
     }
     public void Transfer()
     {
+        _listReceipt.Clear();
         if (false == _dicEthereums.ContainsKey(_type)) throw new Exception("");
         if (_value < UnitConversion.Convert.FromWei(3000)) throw new Exception("");
 
