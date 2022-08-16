@@ -30,7 +30,7 @@ class Transfer_NFT
         await _smartContractTransactionSignedReqeust.SendAndSignedRequest(_transactionInput);
         if(_smartContractTransactionSignedReqeust.Result == null)
         {
-            return null;
+            throw new Exception("");
         }
         await _klayGetTransactionReceiptPollingRequest.PollForReceipt(_smartContractTransactionSignedReqeust.Result, 2.0f);
         return _klayGetTransactionReceiptPollingRequest.Result;
