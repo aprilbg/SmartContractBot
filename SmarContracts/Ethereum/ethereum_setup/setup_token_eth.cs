@@ -2,9 +2,9 @@ namespace SmartContract.Token.Setup
 {
     public class E_token_setup
     {
-        public string _contractAddress = "0x5DA3Cf991cF76b94120c2E1DbA25607185817453";
-        public string _fromAddress = "0xdeEcE376741d4D41b760c9bB98710E7ec080D6BE";
-        public string _privateKey = "8321cddbc7ec78c06b713a6fa09ffe04de9b99211ac1f08fc6e37ee0c2ef5e74";
+        public string _contractAddress = "";
+        public string _fromAddress = "";
+        public string _privateKey = "";
         public string _url = "https://ropsten.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161";
         public string abi =
         @"[
@@ -329,7 +329,12 @@ namespace SmartContract.Token.Setup
     }
     public class Token_Setup_ETH : E_token_setup
     {
-
+        public Token_Setup_ETH()
+        {
+            _contractAddress = "0x5DA3Cf991cF76b94120c2E1DbA25607185817453";
+            _fromAddress = "0xdeEcE376741d4D41b760c9bB98710E7ec080D6BE";
+            _privateKey = "8321cddbc7ec78c06b713a6fa09ffe04de9b99211ac1f08fc6e37ee0c2ef5e74";
+        }
     }
 
     public class Token_Setup_SSD : E_token_setup
