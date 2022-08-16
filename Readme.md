@@ -8,4 +8,7 @@ dotnet ef database update --context Transaction_DB_matic
 
 dotnet ef migrations add InitialCreate --context Transaction_DB_klaytn --output-dir migrations_klaytn/hash
 dotnet ef database update --context Transaction_DB_klaytn
+
+dotnet ef migrations add InitialCreate --context Transaction_DB_nft --output-dir migrations_nft/hash
+dotnet ef database update --context Transaction_DB_nft
 ```
