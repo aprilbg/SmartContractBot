@@ -1,7 +1,7 @@
 public class Dummy_SSD
 {
     private System.Threading.Thread? mainThread = null;
-    private Bot_SSD bot_ssd = new Bot_SSD();
+    private ethereum_bot bot_ssd = new ethereum_bot(eEthereumType.SSD);
 
     public void Start()
     {
@@ -18,7 +18,7 @@ public class Dummy_SSD
         {
             try
             {
-                bot_ssd.Balance_DO();
+                bot_ssd.BalanceOfInfo();
                 bot_ssd.Transfer_Do();
             }
             catch(Exception ex)

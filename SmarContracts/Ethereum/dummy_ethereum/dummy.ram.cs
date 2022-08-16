@@ -1,7 +1,7 @@
 public class Dummy_RAM
 {
     private System.Threading.Thread? mainThread = null;
-    private Bot_RAM bot_ram = new Bot_RAM();
+    private ethereum_bot bot_ram = new ethereum_bot(eEthereumType.RAM);
 
     public void Start()
     {
@@ -18,7 +18,7 @@ public class Dummy_RAM
         {
             try
             {
-                bot_ram.Balance_DO();
+                bot_ram.BalanceOfInfo();
                 bot_ram.Transfer_Do();
             }
             catch(Exception ex)
