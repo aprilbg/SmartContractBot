@@ -2,10 +2,7 @@ using Microsoft.EntityFrameworkCore;
 
 public class Transaction_DB_matic : DbContext
 {
-    public DbSet<Matic_Transaction_Logs> matic_transaction_data { get; set; } = null!;
-    public DbSet<Apple_Transaction_Logs> apple_transaction_data { get; set; } = null!;
-    public DbSet<Ham_Transaction_Logs> ham_transaction_data { get; set; } = null!;
-
+    public DbSet<Transaction_Logs> transaction_data { get; set; } = null!;
     protected override void OnConfiguring(DbContextOptionsBuilder options)
     {
         options.UseMySql(connectionString, _serverVersion);
