@@ -1,7 +1,7 @@
 public class Dummy_Apple
 {
     private System.Threading.Thread? mainThread = null;
-    private Bot_Apple bot_apple = new Bot_Apple();
+    private matic_bot bot_apple = new matic_bot(eMaticType.apple);
 
     public void Start()
     {
@@ -18,7 +18,7 @@ public class Dummy_Apple
         {
             try
             {
-                bot_apple.Balance_DO();
+                bot_apple.BalanceOfInfo();
                 bot_apple.Transfer_Do();
             }
             catch(Exception ex)
