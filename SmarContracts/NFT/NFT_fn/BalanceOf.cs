@@ -32,17 +32,4 @@ class BalanceOf_NFT
         }
         return tokenIds;
     }
-    public async Task<string> nft_ownerof(BigInteger tokenId)
-    {
-        Function _fnownerOfFunction = _contract.GetFunction("ownerOf");
-        CallInput owner_input = _fnownerOfFunction.CreateCallInput(tokenId);
-        await _klaycallRequest.SendRequest(owner_input, BlockParameter.CreateLatest());
-        if (_klaycallRequest.Result == null)
-        {
-            return null;
-        }
-        string _owner = _klaycallRequest.Result;
-        string new_owner = _owner.Remove(2, 24);
-        return new_owner;
-    }
 }
