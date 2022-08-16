@@ -36,7 +36,7 @@ public class NftOwnBehavior
         }
     }
 
-    public void SafeTransder()
+    public void SafeTransfer()
     {
         if (false == _dicNfts.ContainsKey(_type)) throw new Exception("");
         if (false == _dicHasList.ContainsKey(_type)) throw new Exception("");

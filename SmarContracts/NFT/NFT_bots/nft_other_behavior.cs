@@ -38,7 +38,7 @@ public class NftOtherBehavior
         }
     }
 
-    public void SafeTransder()
+    public void SafeTransfer()
     {
         if (false == _dicNfts.ContainsKey(_type)) throw new Exception("");
         var owner = _dicNfts[_type];

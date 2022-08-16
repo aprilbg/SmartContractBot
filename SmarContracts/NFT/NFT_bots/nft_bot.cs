@@ -21,7 +21,7 @@ public class nft_bot
 
     public void SafeTransfer_DO()
     {
-        _ownBehavior.SafeTransder();
-        _otherBehavior.SafeTransder();
+        _ownBehavior.SafeTransfer();
+        _otherBehavior.SafeTransfer();
     }
 }
