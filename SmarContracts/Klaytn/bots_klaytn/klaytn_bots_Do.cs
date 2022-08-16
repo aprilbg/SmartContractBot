@@ -84,6 +84,7 @@ public class KlaytnBotsDo
                     {
                         db.transaction_data.Add(new Transaction_Logs
                         {
+                            CallHashFrom = _type.ToString(),
                             transactionHash = objLog.transactionHash,
                             address = objLog.address,
                             blockHash = objLog.blockHash,

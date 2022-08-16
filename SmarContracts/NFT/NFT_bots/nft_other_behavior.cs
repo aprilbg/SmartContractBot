@@ -37,7 +37,7 @@ public class NftOtherBehavior
             _dicHasList.Add(nft.Key, rt_one_id.Result);
             foreach (var item in rt_one_id.Result)
             {
-                Console.WriteLine($"Owner is : {_type.ToString()} | Owner NFT Id is : {item} | Hold Manager is : {nft.Key}");
+                Console.WriteLine($"Contract : {nft.Key.ToString()} | Owner is : {_type.ToString()} | Owner NFT Id is : {item} | Hold Manager is : {nft.Key}");
             }
         }
     }
@@ -91,6 +91,7 @@ public class NftOtherBehavior
                     {
                         db.transaction_data.Add(new Transaction_Logs
                         {
+                            CallHashFrom = _type.ToString(),
                             transactionHash = objLog.transactionHash,
                             address = objLog.address,
                             blockHash = objLog.blockHash,

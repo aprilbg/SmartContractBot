@@ -84,7 +84,7 @@ public class NftOwnBehavior
                 if (sf_none_manager != null)
                 {
                     var rt = sf_none_manager.Result;
-                    Console.WriteLine($"Call : {this._type.ToString()} | hash : {rt.TransactionHash}");
+                    Console.WriteLine($"Call : {this._type.ToString()} | To : {none_manager.ToString()} | hash : {rt.TransactionHash}");
                     success_id = id;
                     _listReceipt.Add(_type, rt);
                     break;
@@ -148,6 +148,7 @@ public class NftOwnBehavior
                     {
                         db.transaction_data.Add(new Transaction_Logs
                         {
+                            CallHashFrom = _type.ToString(),
                             transactionHash = objLog.transactionHash,
                             address = objLog.address,
                             blockHash = objLog.blockHash,
