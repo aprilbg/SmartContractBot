@@ -1,13 +1,14 @@
 using Nethereum.Util;
 using SmartContract.Klaytn;
+using Receiptinfo;
 public class KlaytnBotsDo
 {
     decimal _value;
     private eKlaytnType _type;
-    private List<KlayTransactionReceipt> _listReceipt = new List<KlayTransactionReceipt>();
+    private Dictionary<eKlaytnType, KlayTransactionReceipt> _listReceipt = new Dictionary<eKlaytnType, KlayTransactionReceipt>();
     private SmartContract.Token.Setup.K_token_setup basic_setup = new SmartContract.Token.Setup.K_token_setup();
     private Dictionary<eKlaytnType, SmartContract.Token.Setup.K_token_setup> _dicKlaytns = new Dictionary<eKlaytnType, SmartContract.Token.Setup.K_token_setup>();
-    public int cycleCount = 0;
+    public int wholeCount = 0;
     public KlaytnBotsDo(eKlaytnType type)
     {
         _type = type;
@@ -51,24 +52,50 @@ public class KlaytnBotsDo
                                                                                 other.Value._fromAddress,
                                                                                 owner._privateKey,
                                                                                 basic_setup._url,
-                                                                                80).token_transfer(cycleCount));
-            ++cycleCount;
+                                                                                80).token_transfer());
             transfer.Wait();
             if (transfer.Result != null)
             {
                 Console.WriteLine($"Transaction From : {_type.ToString()} | Transaction To : {other.Key.ToString()} | Transaction Hash : {transfer.Result.TransactionHash}");
-                _listReceipt.Add(transfer.Result);
+                _listReceipt.Add(_type, transfer.Result);
             }
             else
             {
                 continue;
             }
         }
-        // foreach (var SaveReceipt in _listReceipt)
-        // {
-            
-        // }
-
     }
-
+    public void Save()
+    {
+        ++wholeCount;
+        if (wholeCount > 1)
+        {
+            _listReceipt.Clear();
+        }
+        foreach (var Receipt in _listReceipt)
+        {
+            if (Receipt.Value.Logs != null)
+            {
+                foreach (var logs in Receipt.Value.Logs)
+                {
+                    var objLog = Newtonsoft.Json.JsonConvert.DeserializeObject<ReceiptLog>(logs.ToString());
+                    if (objLog == null) continue;
+                    using (var db = new Transaction_DB_klaytn())
+                    {
+                        db.transaction_data.Add(new Transaction_Logs
+                        {
+                            transactionHash = objLog.transactionHash,
+                            address = objLog.address,
+                            blockHash = objLog.blockHash,
+                            blockNumber = objLog.blockNumber,
+                            data = objLog.data,
+                            logIndex = objLog.logIndex,
+                            transactionIndex = objLog.transactionIndex
+                        });
+                        db.SaveChanges();
+                    }
+                }
+            }
+        }
+    }
 }

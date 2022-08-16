@@ -1,12 +1,14 @@
 using Nethereum.Util;
+using Receiptinfo;
 public class EthereumBotsDo
 {
     decimal _value;
     private eEthereumType _type;
-    private List<Receiptinfo.Receiptinfo> _listReceipt = new List<Receiptinfo.Receiptinfo>();
+    private Dictionary<eEthereumType, Receiptinfo.Receiptinfo> _listReceipt = new Dictionary<eEthereumType, Receiptinfo.Receiptinfo>();
     private SmartContract.Token.Setup.E_token_setup basic_setup = new SmartContract.Token.Setup.E_token_setup();
     private Dictionary<eEthereumType, SmartContract.Token.Setup.E_token_setup> _dicEthereums = new Dictionary<eEthereumType, SmartContract.Token.Setup.E_token_setup>();
     public int cycleCount = 0;
+    public int wholeCount = 0;
     public EthereumBotsDo(eEthereumType type)
     {
         _type = type;
@@ -33,12 +35,12 @@ public class EthereumBotsDo
     {
         if (false == _dicEthereums.ContainsKey(_type)) throw new Exception("");
         if (_value < UnitConversion.Convert.FromWei(3000)) throw new Exception("");
-    
+
         var owner = _dicEthereums[_type];
 
         foreach (var other in _dicEthereums)
         {
-            if(other.Value == owner) continue;
+            if (other.Value == owner) continue;
 
             var transfer = Task.Run(async () => await new Transfer_Token_ETH(basic_setup.abi,
                                                                              owner._contractAddress,
@@ -49,12 +51,49 @@ public class EthereumBotsDo
                                                                              80).token_transfer(cycleCount));
             ++cycleCount;
             transfer.Wait();
-            if(transfer.Result != null)
+            if (transfer.Result != null)
             {
                 Console.WriteLine($"Transaction From : {_type.ToString()} | Transaction To : {other.Key.ToString()} Transaction Hash : {transfer.Result.TransactionHash}");
-                _listReceipt.Add(transfer.Result);
+                _listReceipt.Add(_type, transfer.Result);
+            }
+            else
+            {
+                continue;
             }
 
+        }
+    }
+    public void Save()
+    {
+        ++wholeCount;
+        if (wholeCount > 1)
+        {
+            _listReceipt.Clear();
+        }
+        foreach (var Receipt in _listReceipt)
+        {
+            if (Receipt.Value.Logs != null)
+            {
+                foreach (var logs in Receipt.Value.Logs)
+                {
+                    var objLog = Newtonsoft.Json.JsonConvert.DeserializeObject<ReceiptLog>(logs.ToString());
+                    if (objLog == null) continue;
+                    using (var db = new Transaction_DB_eth())
+                    {
+                        db.transaction_data.Add(new Transaction_Logs
+                        {
+                            transactionHash = objLog.transactionHash,
+                            address = objLog.address,
+                            blockHash = objLog.blockHash,
+                            blockNumber = objLog.blockNumber,
+                            data = objLog.data,
+                            logIndex = objLog.logIndex,
+                            transactionIndex = objLog.transactionIndex
+                        });
+                        db.SaveChanges();
+                    }
+                }
+            }
         }
     }
 }

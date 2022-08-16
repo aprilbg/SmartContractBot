@@ -1,11 +1,15 @@
 using System.Numerics;
+using Receiptinfo;
+using SmartContract.Klaytn;
 
 public class NftOtherBehavior
 {
+    private eNFTType _type;
+    private Dictionary<eNFTType, KlayTransactionReceipt> _listReceipt = new Dictionary<eNFTType, KlayTransactionReceipt>();
     private SmartContract.NFT.Setup_account.NFT_setup basic_setup = new SmartContract.NFT.Setup_account.NFT_setup();
     private Dictionary<eNFTType, SmartContract.NFT.Setup_account.NFT_setup> _dicNfts = new Dictionary<eNFTType, SmartContract.NFT.Setup_account.NFT_setup>();
-    private eNFTType _type;
     private Dictionary<eNFTType, List<BigInteger>> _dicHasList = new Dictionary<eNFTType, List<BigInteger>>();
+    public int wholeCount = 0;
     public NftOtherBehavior(eNFTType type)
     {
         _type = type;
@@ -62,9 +66,43 @@ public class NftOtherBehavior
                 {
                     var rt = sf_none_manager.Result;
                     Console.WriteLine($"go back to {this._type.ToString()} hash : {rt.TransactionHash}");
+                    _listReceipt.Add(_type, rt);
                 }
             }
 
+        }
+    }
+    public void Save()
+    {
+        ++wholeCount;
+        if (wholeCount > 1)
+        {
+            _listReceipt.Clear();
+        }
+        foreach (var Receipt in _listReceipt)
+        {
+            if (Receipt.Value.Logs != null)
+            {
+                foreach (var logs in Receipt.Value.Logs)
+                {
+                    var objLog = Newtonsoft.Json.JsonConvert.DeserializeObject<ReceiptLog>(logs.ToString());
+                    if (objLog == null) continue;
+                    using (var db = new Transaction_DB_nft())
+                    {
+                        db.transaction_data.Add(new Transaction_Logs
+                        {
+                            transactionHash = objLog.transactionHash,
+                            address = objLog.address,
+                            blockHash = objLog.blockHash,
+                            blockNumber = objLog.blockNumber,
+                            data = objLog.data,
+                            logIndex = objLog.logIndex,
+                            transactionIndex = objLog.transactionIndex
+                        });
+                        db.SaveChanges();
+                    }
+                }
+            }
         }
     }
 }
