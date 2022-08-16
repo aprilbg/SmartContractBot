@@ -46,7 +46,7 @@ class Transfer_Token_Matic
             var tenth = System.Numerics.BigInteger.Divide(gasPrice.Value, 20) * (1 + cycleCount);
             var newGasprice = System.Numerics.BigInteger.Add(gasPrice.Value, tenth);
             _transactionInput.GasPrice = new HexBigInteger(newGasprice);
-            Console.WriteLine($"Count : {cycleCount}|{tenth}|{gasPrice}|{_transactionInput.GasPrice}");
+            // Console.WriteLine($"Count : {cycleCount}|{tenth}|{gasPrice}|{_transactionInput.GasPrice}");
         }
 
         HexBigInteger nonce = await eas.Transactions.GetTransactionCount.SendRequestAsync(_fromAddress, BlockParameter.CreateLatest());
