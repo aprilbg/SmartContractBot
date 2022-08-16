@@ -1,5 +1,4 @@
 using Nethereum.Util;
-using Receiptinfo;
 using SmartContract.Klaytn;
 public class KlaytnBotsDo
 {
