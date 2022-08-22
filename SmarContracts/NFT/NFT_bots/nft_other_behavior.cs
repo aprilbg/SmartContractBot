@@ -9,7 +9,6 @@ public class NftOtherBehavior
     private SmartContract.NFT.Setup_account.NFT_setup basic_setup = new SmartContract.NFT.Setup_account.NFT_setup();
     private Dictionary<eNFTType, SmartContract.NFT.Setup_account.NFT_setup> _dicNfts = new Dictionary<eNFTType, SmartContract.NFT.Setup_account.NFT_setup>();
     private Dictionary<eNFTType, List<BigInteger>> _dicHasList = new Dictionary<eNFTType, List<BigInteger>>();
-    public int wholeCount = 0;
     public NftOtherBehavior(eNFTType type)
     {
         _type = type;
@@ -67,7 +66,7 @@ public class NftOtherBehavior
                 {
                     var rt = sf_none_manager.Result;
                     Console.WriteLine($"go back to {this._type.ToString()} hash : {rt.TransactionHash}");
-                    _listReceipt.Add(_type, rt);
+                    _listReceipt.Add(nft.Key, rt);
                 }
             }
 
@@ -75,11 +74,6 @@ public class NftOtherBehavior
     }
     public void Save()
     {
-        ++wholeCount;
-        if (wholeCount > 1)
-        {
-            _listReceipt.Clear();
-        }
         foreach (var Receipt in _listReceipt)
         {
             if (Receipt.Value.Logs != null)

@@ -8,7 +8,6 @@ public class EthereumBotsDo
     private SmartContract.Token.Setup.E_token_setup basic_setup = new SmartContract.Token.Setup.E_token_setup();
     private Dictionary<eEthereumType, SmartContract.Token.Setup.E_token_setup> _dicEthereums = new Dictionary<eEthereumType, SmartContract.Token.Setup.E_token_setup>();
     public int cycleCount = 0;
-    public int wholeCount = 0;
     public EthereumBotsDo(eEthereumType type)
     {
         _type = type;
@@ -55,7 +54,7 @@ public class EthereumBotsDo
             if (transfer.Result != null)
             {
                 Console.WriteLine($"Transaction From : {_type.ToString()} | Transaction To : {other.Key.ToString()} Transaction Hash : {transfer.Result.TransactionHash}");
-                _listReceipt.Add(_type, transfer.Result);
+                _listReceipt.Add(other.Key, transfer.Result);
             }
             else
             {
@@ -66,11 +65,6 @@ public class EthereumBotsDo
     }
     public void Save()
     {
-        ++wholeCount;
-        if (wholeCount > 1)
-        {
-            _listReceipt.Clear();
-        }
         foreach (var Receipt in _listReceipt)
         {
             if (Receipt.Value.Logs != null)

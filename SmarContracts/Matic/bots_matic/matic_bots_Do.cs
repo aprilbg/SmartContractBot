@@ -8,7 +8,6 @@ public class MaticBotsDo
     private SmartContract.Token.Setup.M_token_setup basic_setup = new SmartContract.Token.Setup.M_token_setup();
     private Dictionary<eMaticType, SmartContract.Token.Setup.M_token_setup> _dicMatics = new Dictionary<eMaticType, SmartContract.Token.Setup.M_token_setup>();
     public int cycleCount = 0;
-    public int wholeCount = 0;
     public MaticBotsDo(eMaticType type)
     {
         _type = type;
@@ -53,17 +52,12 @@ public class MaticBotsDo
             if (transfer.Result != null)
             {
                 Console.WriteLine($"Transaction From : {_type.ToString()} | Transaction To : {other.Key.ToString()} Transaction Hash : {transfer.Result.TransactionHash}");
-                _listReceipt.Add(_type, transfer.Result);
+                _listReceipt.Add(other.Key, transfer.Result);
             }
         }
     }
     public void Save()
     {
-        ++wholeCount;
-        if (wholeCount > 1)
-        {
-            _listReceipt.Clear();
-        }
         foreach (var Receipt in _listReceipt)
         {
             if (Receipt.Value.Logs != null)
