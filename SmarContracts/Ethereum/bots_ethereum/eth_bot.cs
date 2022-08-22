@@ -16,4 +16,8 @@ public class ethereum_bot
     {
         _ethereumBotsDo.Transfer();
     }
+    public void Save()
+    {
+        _ethereumBotsDo.Save();
+    }
 }

@@ -24,4 +24,9 @@ public class nft_bot
         _ownBehavior.SafeTransfer();
         _otherBehavior.SafeTransfer();
     }
+    public void Save()
+    {
+        _ownBehavior.Save();
+        _otherBehavior.Save();
+    }
 }

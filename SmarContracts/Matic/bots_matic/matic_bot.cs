@@ -16,4 +16,8 @@ public class matic_bot
     {
         _maticBotsDo.Transfer();
     }
+    public void Save()
+    {
+        _maticBotsDo.Save();
+    }
 }

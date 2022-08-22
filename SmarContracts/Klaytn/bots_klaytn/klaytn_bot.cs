@@ -16,4 +16,8 @@ public class klaytn_bot
     {
         _klaytnBotsDo.Transfer();
     }
+    public void Save()
+    {
+        _klaytnBotsDo.Save();
+    }
 }
