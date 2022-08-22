@@ -20,6 +20,7 @@ public class Dummy_NFT_three
             {
                 bot.GetNftInfo();
                 bot.SafeTransfer_DO();
+                bot.Save();
             }
             catch(Exception ex)
             {

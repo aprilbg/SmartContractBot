@@ -1,7 +1,7 @@
 public class Dummy_SOFT
 {
     private System.Threading.Thread? mainThread = null;
-    private ethereum_bot bot_soft = new ethereum_bot(eEthereumType.SOFT);
+    private ethereum_bot bot = new ethereum_bot(eEthereumType.SOFT);
 
     public void Start()
     {
@@ -18,8 +18,9 @@ public class Dummy_SOFT
         {
             try
             {
-                bot_soft.BalanceOfInfo();
-                bot_soft.Transfer_Do();
+                bot.BalanceOfInfo();
+                bot.Transfer_Do();
+                bot.Save();
             }
             catch(Exception ex)
             {

@@ -1,7 +1,7 @@
 public class Dummy_Ham
 {
     private System.Threading.Thread? mainThread = null;
-    private matic_bot bot_ham = new matic_bot(eMaticType.ham);
+    private matic_bot bot = new matic_bot(eMaticType.ham);
 
     public void Start()
     {
@@ -18,8 +18,9 @@ public class Dummy_Ham
         {
             try
             {
-                bot_ham.BalanceOfInfo();
-                bot_ham.Transfer_Do();
+                bot.BalanceOfInfo();
+                bot.Transfer_Do();
+                bot.Save();
             }
             catch(Exception ex)
             {
